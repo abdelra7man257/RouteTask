@@ -28,6 +28,10 @@ android {
             )
         }
     }
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -42,10 +46,16 @@ kapt {
 
 dependencies {
 
+    implementation(libs.ssp.android)
+    implementation(libs.sdp.android)
+
+
     //Hilt
     implementation(libs.hilt.android)
     implementation(project(":domain"))
     implementation(project(":data"))
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     kapt(libs.hilt.android.compiler)
 
     //Shimmer

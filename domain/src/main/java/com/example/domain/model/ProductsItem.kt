@@ -26,5 +26,6 @@ data class ProductsItem(
     val stock: Int? = null,
     val sku: String? = null,
     val dimensions: Dimensions? = null,
-    val brand: String? = null
+    val brand: String? = null,
+    val priceAfterDiscount: String? = null
 ) : Parcelable
