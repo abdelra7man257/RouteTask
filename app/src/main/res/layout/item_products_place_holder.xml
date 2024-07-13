@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="18dp"
+    app:cardUseCompatPadding="true"
+    app:strokeColor="#8D9FB0"
+    app:strokeWidth="3dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/gray"
+            android:paddingTop="-10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/imageView">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/productName"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:backgroundTint="@color/gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/textView"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:backgroundTint="@color/gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/productName" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/priceAfterDiscount"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:backgroundTint="@color/gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:backgroundTint="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@+id/priceAfterDiscount"
+                app:layout_constraintStart_toEndOf="@+id/priceAfterDiscount"
+                app:layout_constraintTop_toTopOf="@+id/priceAfterDiscount" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_primary_bg"
+            android:backgroundTint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageButton
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_primary_bg"
+            android:backgroundTint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

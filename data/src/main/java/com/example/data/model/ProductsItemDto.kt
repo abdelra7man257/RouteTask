@@ -1,5 +1,6 @@
 package com.example.data.model
 
+import com.example.data.utils.calculatePriceDisCount
 import com.example.domain.model.ProductsItem
 import com.google.gson.annotations.SerializedName
 
@@ -78,10 +79,13 @@ data class ProductsItemDto(
             rating = rating,
             description = description,
             title = title,
-            tags = tags,
             discountPercentage = discountPercentage,
             brand = brand,
-            sku = sku
+            price = price,
+            id = id,
+            priceAfterDiscount = price?.calculatePriceDisCount(discountPercentage ?: 0.0)
         )
     }
+
+
 }
