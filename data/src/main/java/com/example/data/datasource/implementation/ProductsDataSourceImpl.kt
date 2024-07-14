@@ -10,9 +10,9 @@ import javax.inject.Inject
 
 class ProductsDataSourceImpl @Inject constructor(private val webServices: WebServices) :
     ProductsDataSource {
-    override suspend fun getProducts(): Flow<ResultWrapper<List<ProductsItem?>?>> {
+    override suspend fun getProducts(limit: Int?): Flow<ResultWrapper<List<ProductsItem?>?>> {
         return safeApiCall {
-            webServices.getProducts()?.products?.map {
+            webServices.getProducts(limit)?.products?.map {
                 it?.toProductItem()
             }
         }

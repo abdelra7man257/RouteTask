@@ -11,8 +11,8 @@ class ProductsRepositoryImpl @Inject constructor(
     private val productsDataSource: ProductsDataSource
 
 ) : ProductsRepository {
-    override suspend fun getProducts(): Flow<ResultWrapper<List<ProductsItem?>?>> {
-        return productsDataSource.getProducts()
+    override suspend fun getProducts(limit: Int?): Flow<ResultWrapper<List<ProductsItem?>?>> {
+        return productsDataSource.getProducts(limit)
     }
 
 }
