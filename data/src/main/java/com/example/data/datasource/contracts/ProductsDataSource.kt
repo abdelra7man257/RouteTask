@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProductsDataSource {
 
-    suspend fun getProducts(): Flow<ResultWrapper<List<ProductsItem?>?>>
+    suspend fun getProducts(limit: Int? = 30): Flow<ResultWrapper<List<ProductsItem?>?>>
 }
