@@ -23,7 +23,7 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         productsList?.getOrNull(position)?.let { item ->
             holder.item.item = item
-            holder.itemView.invalidate()
+            holder.item.invalidateAll()
         }
     }
 
