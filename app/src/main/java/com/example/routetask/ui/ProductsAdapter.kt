@@ -2,12 +2,14 @@ package com.example.routetask.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.model.ProductsItem
 import com.example.routetask.databinding.ProductItemBinding
+import com.example.routetask.utils.DiffUtils
 
 class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
-    private var productsList: List<ProductsItem?>? = listOf()
+    private var productsList: MutableList<ProductsItem?>? = mutableListOf()
 
     class ViewHolder(val item: ProductItemBinding) : RecyclerView.ViewHolder(item.root)
 
@@ -26,8 +28,11 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
     }
 
     fun setProductsList(productsList: List<ProductsItem?>?) {
-        this.productsList = productsList
-        notifyDataSetChanged()
+        val diffCallback = DiffUtils(this.productsList, productsList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        this.productsList?.clear()
+        this.productsList?.addAll(productsList ?: listOf())
+        diffResult.dispatchUpdatesTo(this)
     }
 
 

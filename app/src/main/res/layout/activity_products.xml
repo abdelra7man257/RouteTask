@@ -75,6 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
@@ -126,6 +127,20 @@
             </LinearLayout>
 
         </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tryAgain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/main_colour"
+            android:text="Try Again"
+            android:textSize="@dimen/_20ssp"
+            android:visibility="gone"
+            app:cornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

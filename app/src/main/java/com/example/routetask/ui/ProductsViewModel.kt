@@ -24,7 +24,7 @@ class ProductsViewModel @Inject constructor(
         getProducts()
     }
 
-    private fun getProducts(limit: Int? = 30) {
+    fun getProducts(limit: Int? = 30) {
         viewModelScope.launch(ioDispatcher) {
             getProductsUseCase.invoke(limit).collect {
                 when (it) {

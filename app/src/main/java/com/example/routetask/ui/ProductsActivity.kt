@@ -1,6 +1,7 @@
 package com.example.routetask.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,9 +11,10 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.domain.model.ProductsItem
 import com.example.domain.utils.ResultWrapper
 import com.example.routetask.R
-import com.example.routetask.databinding.ActivityMainBinding
+import com.example.routetask.databinding.ActivityProductsBinding
 import com.example.routetask.utils.showSnackBar
 import com.facebook.shimmer.Shimmer
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,14 +23,14 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProductsActivity : AppCompatActivity() {
-    private var _binding: ActivityMainBinding? = null
+    private var _binding: ActivityProductsBinding? = null
     private val binding get() = _binding
     private val viewModel: ProductsViewModel by viewModels<ProductsViewModel>()
     private val adapter = ProductsAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        _binding = ActivityMainBinding.inflate(layoutInflater)
+        _binding = ActivityProductsBinding.inflate(layoutInflater)
         setContentView(binding?.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -42,6 +44,9 @@ class ProductsActivity : AppCompatActivity() {
 
     private fun initViews() {
         binding?.productsRv?.adapter = adapter
+        binding?.tryAgain?.setOnClickListener {
+            viewModel.getProducts()
+        }
     }
 
     private fun collectUiData() {
@@ -49,24 +54,32 @@ class ProductsActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED)
             {
                 viewModel.response.collect {
-                    when (it) {
-                        is ResultWrapper.Error -> {
-                            showSnackBar(it.message, binding?.root!!)
-                            hideShimmer()
-                        }
-
-                        is ResultWrapper.Loading -> {
-                            showShimmer()
-                        }
-
-                        is ResultWrapper.Success -> {
-                            hideShimmer()
-                            adapter.setProductsList(it.data)
-                        }
-                    }
+                    handelUiStates(it)
                 }
             }
 
+
+        }
+    }
+
+    private fun handelUiStates(it: ResultWrapper<List<ProductsItem?>?>) {
+        when (it) {
+            is ResultWrapper.Error -> {
+                showSnackBar(it.message, binding?.root!!)
+                binding?.tryAgain?.visibility = View.VISIBLE
+                hideShimmer()
+            }
+
+            is ResultWrapper.Loading -> {
+                binding?.tryAgain?.visibility = View.GONE
+                showShimmer()
+            }
+
+            is ResultWrapper.Success -> {
+                hideShimmer()
+                binding?.tryAgain?.visibility = View.GONE
+                adapter.setProductsList(it.data)
+            }
 
         }
     }
